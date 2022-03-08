@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domains\Inventory\Controllers;
+namespace App\Domain\Inventory\Controllers;
 
-use App\Domains\Inventory\Actions\CreateCategoryAction;
-use App\Domains\Inventory\DataTransferObjects\CategoryDTO;
+use App\Domain\Inventory\Actions\CreateCategoryAction;
+use App\Domain\Inventory\DataTransferObjects\CategoryDTO;
 use App\Http\Controller;
 use Illuminate\Http\Request;
 use function response;

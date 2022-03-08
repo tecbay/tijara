@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domains\Inventory\Projectors;
+namespace App\Domain\Inventory\Projectors;
 
-use App\Domains\Inventory\Models\Category;
-use App\Domains\Inventory\StorableEvents\CategoryCreated;
+use App\Domain\Inventory\Projection\Category;
+use App\Domain\Inventory\Events\CategoryCreated;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class CategoryProjector extends Projector
@@ -18,5 +18,6 @@ class CategoryProjector extends Projector
                 'description' => $event->description,
                 'parent_uuid' => $event->parent_uuid,
             ]);
+
     }
 }

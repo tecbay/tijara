@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domains\Inventory\Actions;
+namespace App\Domain\Inventory\Actions;
 
 use App\Domain\Inventory\Aggregates\ProductAggregateRoot;
-use App\Domains\Inventory\DataTransferObjects\ProductDTO;
+use App\Domain\Inventory\DataTransferObjects\ProductDTO;
 
 class AddProductInventory
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Inventory\Controllers;
+namespace App\Domain\Inventory\Controllers;
 
 use App\Http\Controller;
 use App\Models\Outlet;

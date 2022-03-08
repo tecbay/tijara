@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Inventory\Supports;
+namespace App\Domain\Inventory\Supports;
 
 class Sku
 {

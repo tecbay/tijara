@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Sales\Aggregates;
+namespace App\Domain\Sales;
 
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 

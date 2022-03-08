@@ -2,17 +2,23 @@
 
 namespace Tests;
 
-use App\Domains\Inventory\Actions\CreateCategoryAction;
-use App\Domains\Inventory\DataTransferObjects\CategoryDTO;
+use App\Domain\ACL\Actions\CreateUser;
+use App\Domain\Inventory\Actions\CreateCategoryAction;
+use App\Domain\Inventory\DataTransferObjects\CategoryDTO;
+use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
+    use CreatesApplication, WithFaker;
 
-    public \App\Domains\Inventory\Models\Category $category;
+    public \App\Domain\Inventory\Projection\Category $category;
+    public User $user;
 
     protected function setUp(): void
     {
@@ -23,5 +29,11 @@ abstract class TestCase extends BaseTestCase
         });
 
         $this->category = (new CreateCategoryAction(new CategoryDTO('Top Category', null, null)))();
+
+        $this->user = (new CreateUser(
+            name: Str::random(4),
+            email: $this->faker->email,
+            password: Hash::make('password')
+        ))();
     }
 }

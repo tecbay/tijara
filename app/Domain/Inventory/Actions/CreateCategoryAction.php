@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Inventory\Actions;
+namespace App\Domain\Inventory\Actions;
 
 use App\Domain\Inventory\Aggregates\CategoryAggregateRoot;
-use App\Domains\Inventory\DataTransferObjects\CategoryDTO;
-use App\Domains\Inventory\Models\Category;
+use App\Domain\Inventory\DataTransferObjects\CategoryDTO;
+use App\Domain\Inventory\Projection\Category;
 use App\Support\Uuid;
 
 class CreateCategoryAction
@@ -16,7 +16,7 @@ class CreateCategoryAction
     public function __invoke(): Category
     {
         $uuid = Uuid::new();
-        $productAggregate = CategoryAggregateRoot::retrieve($uuid)
+        CategoryAggregateRoot::retrieve($uuid)
             ->createCategory($this->categoryDTO)
             ->persist();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Inventory\Models;
+namespace App\Domain\Inventory\Projection;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\EventSourcing\Projections\Projection;

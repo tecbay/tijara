@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Domains\Inventory;
+namespace Tests\Domain\Inventory;
 
-use App\Domains\Inventory\Supports\Enums\ProductStatus;
+use App\Domain\Inventory\Supports\Enums\ProductStatus;
 use App\Support\Enums\Boolean;
 use Illuminate\Support\Str;
 use Tecbay\Laramedia\Models\TemporaryMedia;

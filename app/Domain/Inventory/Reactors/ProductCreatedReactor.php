@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Inventory\Reactors;
+namespace App\Domain\Inventory\Reactors;
 
 use App\Reactors\EventHappened;
 use Illuminate\Contracts\Queue\ShouldQueue;

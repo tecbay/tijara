@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Domain\Cart\Enums\CartStatus;
+use App\Domain\Cart\Projection\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,33 +18,23 @@ class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    public $incrementing = false;
+    public $primaryKey = 'uuid';
+    protected $keyType = 'string';
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    protected $guarded = ['email_verified_at'];
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function activeCart()
+    {
+        return $this->hasOne(Cart::class)->whereStatus(CartStatus::Active);
+    }
 }

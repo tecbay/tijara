@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::group([], function () {
+Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::post('/products', [\App\Domains\Inventory\Controllers\ProductController::class, 'store']);
-    Route::post('/categories', [\App\Domains\Inventory\Controllers\CategoryController::class, 'store']);
+    Route::post('/categories', [\App\Domain\Inventory\Controllers\CategoryController::class, 'store']);
+    Route::post('/products', [\App\Domain\Inventory\Controllers\ProductController::class, 'store']);
+
+    Route::apiResource('/cart-item/{product_uuid}', \App\Domain\Cart\Controllers\CartItemController::class)
+        ->only(['store', 'delete']);
 
 });

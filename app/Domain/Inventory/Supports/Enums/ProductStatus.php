@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Inventory\Supports\Enums;
+namespace App\Domain\Inventory\Supports\Enums;
 
 enum ProductStatus: string
 {

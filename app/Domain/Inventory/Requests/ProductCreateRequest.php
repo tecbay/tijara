@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\Inventory\Requests;
+namespace App\Domain\Inventory\Requests;
 
-use App\Domains\Inventory\Supports\Enums\ProductStatus;
+use App\Domain\Inventory\Supports\Enums\ProductStatus;
 use App\Support\Enums\Boolean;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

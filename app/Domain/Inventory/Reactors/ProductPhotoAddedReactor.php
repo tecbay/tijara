@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domains\Inventory\Reactors;
+namespace App\Domain\Inventory\Reactors;
 
-use App\Domains\Inventory\Models\Product;
-use App\Domains\Inventory\StorableEvents\ProductPhotoAdded;
+use App\Domain\Inventory\Projection\Product;
+use App\Domain\Inventory\Events\ProductPhotoAdded;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Spatie\EventSourcing\EventHandlers\Reactors\Reactor;
 

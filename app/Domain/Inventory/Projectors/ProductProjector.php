@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domains\Inventory\Projectors;
+namespace App\Domain\Inventory\Projectors;
 
-use App\Domains\Inventory\Models\Product;
-use App\Domains\Inventory\StorableEvents\ProductCreated;
+use App\Domain\Inventory\Projection\Product;
+use App\Domain\Inventory\Events\ProductCreated;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class ProductProjector extends Projector

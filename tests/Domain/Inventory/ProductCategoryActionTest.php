@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Domains\Inventory;
+namespace Tests\Domain\Inventory;
 
 use Tests\TestCase;
 

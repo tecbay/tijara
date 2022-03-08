@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\Inventory\StorableEvents;
+namespace App\Domain\Inventory\Events;
 
-use App\Domains\Inventory\Supports\Enums\ProductStatus;
+use App\Domain\Inventory\Supports\Enums\ProductStatus;
 use App\Support\Enums\Boolean;
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domains\Inventory\DataTransferObjects;
+namespace App\Domain\Inventory\DataTransferObjects;
 
-use App\Domains\Inventory\Models\Category;
-use App\Domains\Inventory\Requests\ProductCreateRequest;
-use App\Domains\Inventory\Supports\Enums\ProductStatus;
-use App\Domains\Inventory\Supports\Sku;
+use App\Domain\Inventory\Projection\Category;
+use App\Domain\Inventory\Requests\ProductCreateRequest;
+use App\Domain\Inventory\Supports\Enums\ProductStatus;
+use App\Domain\Inventory\Supports\Sku;
 use App\Support\Enums\Boolean;
 use App\Support\Uuid;
 

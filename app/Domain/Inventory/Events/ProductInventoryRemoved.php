@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Inventory\StorableEvents;
+namespace App\Domain\Inventory\Events;
 
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 
-class ProductInventoryAdded extends ShouldBeStored
+class ProductInventoryRemoved extends ShouldBeStored
 {
     public function __construct(public int $qty)
     {

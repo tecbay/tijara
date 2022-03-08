@@ -2,8 +2,8 @@
 
 namespace App\Domain\Inventory\Aggregates;
 
-use App\Domains\Inventory\DataTransferObjects\CategoryDTO;
-use App\Domains\Inventory\StorableEvents\CategoryCreated;
+use App\Domain\Inventory\DataTransferObjects\CategoryDTO;
+use App\Domain\Inventory\Events\CategoryCreated;
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 
 class CategoryAggregateRoot extends AggregateRoot

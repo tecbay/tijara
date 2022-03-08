@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Inventory\DataTransferObjects;
+namespace App\Domain\Inventory\DataTransferObjects;
 
 use Illuminate\Http\Request;
 

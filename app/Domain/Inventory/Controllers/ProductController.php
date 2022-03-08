@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domains\Inventory\Controllers;
+namespace App\Domain\Inventory\Controllers;
 
-use App\Domains\Inventory\Actions\AddProductInventory;
-use App\Domains\Inventory\Actions\AddProductPhoto;
-use App\Domains\Inventory\Actions\CreateProductAction;
-use App\Domains\Inventory\DataTransferObjects\ProductDTO;
-use App\Domains\Inventory\Requests\ProductCreateRequest;
+use App\Domain\Inventory\Actions\AddProductInventory;
+use App\Domain\Inventory\Actions\AddProductPhoto;
+use App\Domain\Inventory\Actions\CreateProductAction;
+use App\Domain\Inventory\DataTransferObjects\ProductDTO;
+use App\Domain\Inventory\Requests\ProductCreateRequest;
 use App\Http\Controller;
 use App\Support\Enums\Boolean;
 

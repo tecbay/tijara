@@ -3,12 +3,12 @@
 namespace App\Domain\Inventory\Aggregates;
 
 use App\Domain\Inventory\Exceptions\InventoryCannotBeNegative;
-use App\Domains\Inventory\DataTransferObjects\ProductDTO;
-use App\Domains\Inventory\StorableEvents\ProductCreated;
-use App\Domains\Inventory\StorableEvents\ProductInventoryAdded;
-use App\Domains\Inventory\StorableEvents\ProductInventoryRemoved;
-use App\Domains\Inventory\StorableEvents\ProductPhotoAdded;
-use App\Domains\Inventory\StorableEvents\ProductPhotoRemoved;
+use App\Domain\Inventory\DataTransferObjects\ProductDTO;
+use App\Domain\Inventory\Events\ProductCreated;
+use App\Domain\Inventory\Events\ProductInventoryAdded;
+use App\Domain\Inventory\Events\ProductInventoryRemoved;
+use App\Domain\Inventory\Events\ProductPhotoAdded;
+use App\Domain\Inventory\Events\ProductPhotoRemoved;
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 
 class ProductAggregateRoot extends AggregateRoot

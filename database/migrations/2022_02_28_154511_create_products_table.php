@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\Inventory\Supports\Enums\ProductStatus;
+use App\Domain\Inventory\Supports\Enums\ProductStatus;
 use App\Support\Enums\Boolean;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,9 +16,8 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            ;
-            $table->id();
-            $table->uuid()->index();
+//            $table->id();
+            $table->uuid()->primary()->index();
             $table->string('title', 128);
             $table->text('description')->invisible();
             $table->text('category_uuid');
