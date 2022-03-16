@@ -6,7 +6,7 @@ use MyCLabs\Enum\Enum;
 
 enum Boolean: string
 {
-    case YES = 'y';
-    case NO = 'n';
+    case YES = 'yes';
+    case NO = 'no';
 
 }

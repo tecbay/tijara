@@ -53,10 +53,7 @@
         ]
     },
     "repositories": [
-        {
-            "type": "path",
-            "url": "../packages/laramedia"
-        }
+
     ],
     "extra": {
         "laravel": {

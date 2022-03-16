@@ -8,14 +8,14 @@ use App\Domain\Cart\CartAggregateRoot;
 
 class AddCartItem
 {
-    public function __construct(public string $cartUuid, public string $productId, public int $qty)
+    public function __construct(public string $cartUuid, public string $productUuid, public int $qty)
     {
     }
 
     public function __invoke()
     {
         CartAggregateRoot::retrieve($this->cartUuid)
-            ->addItem($this->productId, $this->qty)
+            ->addItem($this->productUuid, $this->qty)
             ->persist();
     }
 }

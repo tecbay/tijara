@@ -2,8 +2,8 @@
 
 namespace App\Domain\Inventory\Actions;
 
-use App\Domain\Inventory\Aggregates\ProductAggregateRoot;
 use App\Domain\Inventory\DataTransferObjects\ProductDTO;
+use App\Domain\Inventory\ProductAggregateRoot;
 use App\Domain\Inventory\Projection\Product;
 
 class AddProductPhoto

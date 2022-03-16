@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Domain\Inventory\Aggregates;
+namespace App\Domain\Inventory;
 
-use App\Domain\Inventory\Exceptions\InventoryCannotBeNegative;
 use App\Domain\Inventory\DataTransferObjects\ProductDTO;
 use App\Domain\Inventory\Events\ProductCreated;
 use App\Domain\Inventory\Events\ProductInventoryAdded;
 use App\Domain\Inventory\Events\ProductInventoryRemoved;
 use App\Domain\Inventory\Events\ProductPhotoAdded;
 use App\Domain\Inventory\Events\ProductPhotoRemoved;
+use App\Domain\Inventory\Exceptions\InventoryCannotBeNegative;
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 
 class ProductAggregateRoot extends AggregateRoot
@@ -50,7 +50,9 @@ class ProductAggregateRoot extends AggregateRoot
     public function removeInventory(int $qty): self
     {
         if (($this->inventory - $qty) < 0) {
-            throw new InventoryCannotBeNegative();
+            throw InventoryCannotBeNegative::withMessages([
+                'invalidInput' => 'Inventory can\'t be negative.',
+            ]);
         }
 
         $this->recordThat(new ProductInventoryRemoved($qty));

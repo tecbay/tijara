@@ -19,8 +19,8 @@ class ProductController extends Controller
 
         $product = (new CreateProductAction($productDto))();
 
-        if (Boolean::from($request->track_quantity) === Boolean::YES) {
-            (new AddProductInventory($productDto, $request->inventory_qty))();
+        if (Boolean::tryFrom($request->track_quantity) === Boolean::YES) {
+            (new AddProductInventory($productDto->uuid, $request->inventory_qty))();
         }
 
 

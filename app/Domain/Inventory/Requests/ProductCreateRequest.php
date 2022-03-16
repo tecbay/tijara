@@ -47,7 +47,6 @@ class ProductCreateRequest extends FormRequest
     {
 
 
-
         return [
             'uuid'             => ['exclude'],
             'title'            => ['required', 'string', 'max:255'],
@@ -64,13 +63,14 @@ class ProductCreateRequest extends FormRequest
                 // The initial inventory can be Zero(0).
                 // Because, maybe we will
                 // buy the product later
-                'sometimes', 'numeric', 'min:0',
-                Rule::requiredIf(fn() => $this->track_quantity == Boolean::YES),
+                Rule::requiredIf(fn() => Boolean::tryFrom($this->track_quantity) == Boolean::YES),
+                'numeric', 'min:0',
             ],
             'physical_product' => ['required', new Enum(Boolean::class)],
             'weight'           => [
-                'sometimes', 'numeric', 'min:0',
-                Rule::requiredIf(fn() => $this->physical_product == Boolean::YES),
+                Rule::requiredIf(fn() => Boolean::tryFrom($this->physical_product) == Boolean::YES),
+                'exclude_if:physical_product,no',
+                'numeric', 'min:0',
             ],
         ];
     }

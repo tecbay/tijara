@@ -12,7 +12,6 @@ use App\Support\Uuid;
 
 class ProductDTO
 {
-    private int $availableInventory = 0;
 
     public function __construct(
         public string $uuid,
@@ -42,27 +41,14 @@ class ProductDTO
             sku: $request->sku ?? Sku::new($request->title),
             track_quantity: Boolean::from($request->track_quantity),
             status: ProductStatus::from($request->status),
-            price: $request->price,
-            compareAtPrice: $request->compare_at_price,
-            costPerItem: $request->cost_per_item,
+            price: floatval($request->price),
+            compareAtPrice: floatval($request->compare_at_price),
+            costPerItem: floatval($request->cost_per_item),
             physicalProduct: Boolean::from($request->physical_product),
-            weight: $request->weight
+            weight: floatval($request->weight)
         );
 
-        if ($request->track_quantity) {
-            $dto->setAvailableInventory($request->inventory_qty);
-        }
-
         return $dto;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAvailableInventory(): int
-    {
-        // Todo need to implement
-        return $this->availableInventory;
     }
 
     /**

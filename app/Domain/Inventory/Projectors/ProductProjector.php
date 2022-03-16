@@ -2,6 +2,7 @@
 
 namespace App\Domain\Inventory\Projectors;
 
+use App\Domain\Inventory\Projection\Inventory;
 use App\Domain\Inventory\Projection\Product;
 use App\Domain\Inventory\Events\ProductCreated;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
@@ -26,5 +27,6 @@ class ProductProjector extends Projector
                 'cost_per_item'    => $event->costPerItem,
                 'weight'           => $event->weight,
             ]);
+
     }
 }

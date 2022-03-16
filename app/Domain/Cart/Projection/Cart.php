@@ -11,4 +11,9 @@ class Cart extends Projection
 
     protected $guarded = [];
 
+    public function items()
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
 }
