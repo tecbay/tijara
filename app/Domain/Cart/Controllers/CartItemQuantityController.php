@@ -11,10 +11,15 @@ use App\Domain\Manufacturing\Projection\Product;
 use Illuminate\Http\Request;
 use function auth;
 
+
 class CartItemQuantityController
 {
     /**
-     * This api responsible for increase the quantity of a cart item
+     * @group Cart
+     * Increase cart item quantity
+     *
+     * @authenticated
+     * @header Content-Type application/json
      *
      */
     public function store(Product $product, Request $request)
@@ -31,7 +36,11 @@ class CartItemQuantityController
     }
 
     /**
-     * This api responsible for decrease the quantity of a cart item
+     * @group Cart
+     * Decrease cart item quantity
+     *
+     * @authenticated
+     * @header Content-Type application/json
      *
      */
     public function destroy(Product $product, Request $request)

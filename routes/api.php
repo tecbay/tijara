@@ -12,8 +12,8 @@ Route::post('/v1/login', \App\Http\Controllers\LoginController::class);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::post('/categories', [\App\Domain\Manufacturing\Controllers\CategoryController::class, 'store']);
     Route::get('/categories', [\App\Domain\Manufacturing\Controllers\CategoryController::class, 'index']);
+    Route::post('/categories', [\App\Domain\Manufacturing\Controllers\CategoryController::class, 'store']);
 
     Route::post('/products', [\App\Domain\Manufacturing\Controllers\ProductController::class, 'store']);
 

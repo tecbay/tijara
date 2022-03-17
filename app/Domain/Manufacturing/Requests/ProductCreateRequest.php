@@ -51,7 +51,7 @@ class ProductCreateRequest extends FormRequest
             'uuid'             => ['exclude'],
             'title'            => ['required', 'string', 'max:255'],
             'description'      => ['sometimes', 'string', 'max:255'],
-            'category_uuid'    => ['required', 'exists:categories,uuid', 'string', 'max:255'],
+            'category_uuid'    => ['required', 'exists:categories,uuid', 'uuid'],
             'medias'           => ['sometimes', 'array', 'max:3', $this->images()],
             'sku'              => ['sometimes', 'string', 'max:255'],
             'track_quantity'   => ['required', new Enum(Boolean::class)],

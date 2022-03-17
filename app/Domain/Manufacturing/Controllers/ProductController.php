@@ -14,6 +14,15 @@ use function response;
 
 class ProductController extends Controller
 {
+    /**
+     *
+     * @group Manufacturing
+     * Create Product
+     *
+     * @authenticated
+     * @header Content-Type application/json
+     *
+     */
     public function store(ProductCreateRequest $request)
     {
         $productDto = ProductDTO::fromProductCreateRequest($request);
@@ -23,7 +32,6 @@ class ProductController extends Controller
         if (Boolean::tryFrom($request->track_quantity) === Boolean::YES) {
             (new AddInventory($productDto->uuid, $request->inventory_qty))();
         }
-
 
         if ($request->has('medias')) {
             foreach ($request->medias as $media) {

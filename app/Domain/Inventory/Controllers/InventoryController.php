@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 class InventoryController extends Controller
 {
 
+    /**
+     * @group Inventory
+     * Add Inventory
+     *
+     * @authenticated
+     * @header Content-Type application/json
+     *
+     */
     public function store(Product $product, Request $request)
     {
         $request->validate([
@@ -23,11 +31,26 @@ class InventoryController extends Controller
         return response()->json($product->inventory);
     }
 
+    /**
+     * @group Inventory
+     * Inventory Info
+     *
+     * @authenticated
+     * @header Content-Type application/json
+     *
+     */
     public function show(Product $product)
     {
         return response()->json($product->inventory);
     }
 
+    /**
+     * @group Inventory
+     * Remove Inventory
+     * @authenticated
+     * @header Content-Type application/json
+     *
+     */
     public function destroy(Product $product, Request $request)
     {
         $request->validate([

@@ -12,8 +12,13 @@ use function auth;
 
 class CartItemController
 {
+
     /**
-     * This api responsible for adding an item into active cart.
+     * @group Cart
+     * Add cart item
+     *
+     * @authenticated
+     * @header Content-Type application/json
      *
      */
     public function store(Product $product, Request $request)
@@ -32,11 +37,13 @@ class CartItemController
     }
 
     /**
-     * This is responsible for removing an item from active cart.
      *
-     * @param $productUuid
-     * @param  Request  $request
-     * @return void
+     * @group Cart
+     * Remove cart item
+     *
+     * @authenticated
+     * @header Content-Type application/json
+     *
      */
     public function destroy(Product $product)
     {

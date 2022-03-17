@@ -11,11 +11,23 @@ use function response;
 
 class CategoryController extends Controller
 {
+    /**
+     * @group Manufacturing
+     * Retrieve all categories.
+     * @unauthenticated
+     * */
     public function index()
     {
         return response()->json(Category::all());
     }
 
+    /**
+     * @group Manufacturing
+     * Create Category
+     * @unauthenticated
+     * @header Content-Type application/json
+     *
+     */
     public function store(Request $request)
     {
         $request->validate([
