@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Inventory\Actions;
 
-use App\Domain\Manufacturing\ProductAggregateRoot;
+use App\Domain\Inventory\InventoryAggregateRoot;
 
 class RemoveInventory
 {
@@ -18,7 +18,7 @@ class RemoveInventory
      */
     public function __invoke()
     {
-        ProductAggregateRoot::retrieve($this->productUuid)
+        InventoryAggregateRoot::retrieve($this->productUuid)
             ->removeInventory($this->qty)
             ->persist();
     }

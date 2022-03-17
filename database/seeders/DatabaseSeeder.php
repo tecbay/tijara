@@ -22,14 +22,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
         ]);
 
-        if (app()->environment('local')) {
-            $user->tokens()->create([
-                'name'      => 'test',
-                'token'     => 'IT5hdnHtmqOvxlUZM3mKNyapHQ0CyB1hEjBJGijKXZxCAqawkVPcBFMDAtcQEqYk',
-                'abilities' => ['*'],
-            ]);
-        }
-
         (new CreateCategoryAction(
             new CategoryDTO(Str::random(8), null, null))
         )();

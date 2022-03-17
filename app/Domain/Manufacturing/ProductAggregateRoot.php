@@ -14,8 +14,6 @@ use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 class ProductAggregateRoot extends AggregateRoot
 {
 
-    protected int $inventory = 0;
-
     public function create(ProductDTO $productDTO): self
     {
         $this->recordThat(new ProductCreated(
@@ -36,30 +34,6 @@ class ProductAggregateRoot extends AggregateRoot
         return $this;
     }
 
-    public function addInventory(int $qty): self
-    {
-
-        $this->recordThat(new InventoryAdded($qty));
-
-        return $this;
-    }
-
-    /**
-     * @throws InventoryCannotBeNegative
-     */
-    public function removeInventory(int $qty): self
-    {
-        if (($this->inventory - $qty) < 0) {
-            throw InventoryCannotBeNegative::withMessages([
-                'invalidInput' => 'Inventory can\'t be negative.',
-            ]);
-        }
-
-        $this->recordThat(new InventoryRemoved($qty));
-
-        return $this;
-    }
-
     public function addPhoto(string $temporaryMediaUuid): static
     {
         $this->recordThat(new ProductPhotoAdded(
@@ -69,23 +43,13 @@ class ProductAggregateRoot extends AggregateRoot
         return $this;
     }
 
-    public function addRemove(string $temporaryMediaUuid)
+    public function removePhoto(string $temporaryMediaUuid)
     {
         $this->recordThat(new ProductPhotoRemoved(
             temporaryMediaUuid: $temporaryMediaUuid
         ));
 
         return $this;
-    }
-
-    protected function applyProductInventoryAdded(InventoryAdded $event)
-    {
-        $this->inventory += $event->qty;
-    }
-
-    protected function applyProductInventoryRemoved(InventoryRemoved $event)
-    {
-        $this->inventory -= $event->qty;
     }
 
 }
