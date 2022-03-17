@@ -14,7 +14,6 @@ class CategoryController extends Controller
     /**
      * @group Manufacturing
      * Retrieve all categories.
-     * @unauthenticated
      * */
     public function index()
     {

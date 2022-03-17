@@ -22,6 +22,7 @@ class ProductController extends Controller
      * @authenticated
      * @header Content-Type application/json
      *
+     *
      */
     public function store(ProductCreateRequest $request)
     {

@@ -8,7 +8,6 @@ class CartController
      * @group Cart
      * User's active cart info.
      *
-     * @authenticated
      * @header Content-Type application/json
      *
      * @urlParam id int required The user's ID. Example: 88683

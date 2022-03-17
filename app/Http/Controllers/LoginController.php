@@ -7,8 +7,26 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @group Authentication
+ * API endpoints for managing authentication
+ *
+ * @unauthenticated
+ */
 class LoginController
 {
+
+    /**
+     * Log in the user.
+     *
+     * @bodyParam   email    string  required    The email of the  user.      Example: admin@gmail.com
+     * @bodyParam   password    string  required    The password of the  user.   Example: password
+     *
+     * @response {
+     *  "token": "eyJ0eXA..."
+     * }
+     *
+     */
     public function __invoke(Request $request)
     {
 
