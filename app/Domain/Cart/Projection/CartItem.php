@@ -2,7 +2,7 @@
 
 namespace App\Domain\Cart\Projection;
 
-use App\Domain\Inventory\Projection\Product;
+use App\Domain\Manufacturing\Projection\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\EventSourcing\Projections\Projection;

@@ -2,9 +2,9 @@
 
 namespace App\Domain\Inventory\Controllers;
 
-use App\Domain\Inventory\Actions\AddProductInventory;
-use App\Domain\Inventory\Actions\RemoveProductInventory;
-use App\Domain\Inventory\Projection\Product;
+use App\Domain\Inventory\Actions\AddInventory;
+use App\Domain\Inventory\Actions\RemoveInventory;
+use App\Domain\Manufacturing\Projection\Product;
 use App\Http\Controller;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class InventoryController extends Controller
             'qty' => ['required', 'numeric', 'min:1'],
         ]);
 
-        (new AddProductInventory($product->uuid, $request->qty))();
+        (new AddInventory($product->uuid, $request->qty))();
 
         return response()->json($product->inventory);
     }
@@ -34,7 +34,7 @@ class InventoryController extends Controller
             'qty' => ['required', 'numeric', 'min:1'],
         ]);
 
-        (new RemoveProductInventory($product->uuid, $request->qty))();
+        (new RemoveInventory($product->uuid, $request->qty))();
 
         return response()->json($product->inventory);
     }

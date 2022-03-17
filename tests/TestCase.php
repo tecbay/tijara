@@ -3,8 +3,8 @@
 namespace Tests;
 
 use App\Domain\ACL\Actions\CreateUser;
-use App\Domain\Inventory\Actions\CreateCategoryAction;
-use App\Domain\Inventory\DataTransferObjects\CategoryDTO;
+use App\Domain\Manufacturing\Actions\CreateCategoryAction;
+use App\Domain\Manufacturing\DataTransferObjects\CategoryDTO;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithFaker;

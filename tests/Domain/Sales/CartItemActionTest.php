@@ -3,11 +3,9 @@
 namespace Tests\Domain\Sales;
 
 
-use App\Domain\Inventory\Actions\CreateProductAction;
-use App\Domain\Inventory\DataTransferObjects\ProductDTO;
-use App\Domain\Inventory\Factory\ProductFactory;
-use App\Domain\Inventory\Projection\Product;
-use App\Domain\Inventory\Supports\Enums\ProductStatus;
+use App\Domain\Manufacturing\Actions\CreateProductAction;
+use App\Domain\Manufacturing\DataTransferObjects\ProductDTO;
+use App\Domain\Manufacturing\Supports\Enums\ProductStatus;
 use App\Support\Enums\Boolean;
 use App\Support\Uuid;
 use Illuminate\Support\Str;

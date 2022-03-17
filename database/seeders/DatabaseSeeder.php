@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Domain\Inventory\Actions\CreateCategoryAction;
-use App\Domain\Inventory\DataTransferObjects\CategoryDTO;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Domain\Manufacturing\Actions\CreateCategoryAction;
+use App\Domain\Manufacturing\DataTransferObjects\CategoryDTO;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 

@@ -3,11 +3,8 @@
 namespace App\Domain\Cart\Projectors;
 
 use App\Domain\Cart\Enums\CartStatus;
-use App\Domain\Cart\Events\CartItemAdded;
-use App\Domain\Cart\Events\CartItemUpdated;
+use App\Domain\Cart\Events\CartCreated;
 use App\Domain\Cart\Projection\Cart;
-use App\Domain\Cart\Projection\CartItem;
-use App\Domain\Inventory\Events\CartCreated;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class CartProjector extends Projector

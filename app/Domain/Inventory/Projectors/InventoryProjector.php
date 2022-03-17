@@ -2,15 +2,14 @@
 
 namespace App\Domain\Inventory\Projectors;
 
-use App\Domain\Inventory\Events\ProductInventoryAdded;
-use App\Domain\Inventory\Events\ProductInventoryRemoved;
+use App\Domain\Inventory\Events\InventoryAdded;
+use App\Domain\Inventory\Events\InventoryRemoved;
 use App\Domain\Inventory\Projection\Inventory;
-use App\Domain\Inventory\Projection\Product;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class InventoryProjector extends Projector
 {
-    public function onAddProductInventory(ProductInventoryAdded $event)
+    public function onAddProductInventory(InventoryAdded $event)
     {
         $inventory = Inventory::find($event->aggregateRootUuid());
 
@@ -27,7 +26,7 @@ class InventoryProjector extends Projector
             ->update(['qty' => $inventory->qty + $event->qty]);
     }
 
-    public function onRemoveProductInventory(ProductInventoryRemoved $event)
+    public function onRemoveProductInventory(InventoryRemoved $event)
     {
         $inventory = Inventory::find($event->aggregateRootUuid());
 

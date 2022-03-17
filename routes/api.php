@@ -12,11 +12,10 @@ Route::post('/v1/login', \App\Http\Controllers\LoginController::class);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::post('/categories', [\App\Domain\Inventory\Controllers\CategoryController::class, 'store']);
-    Route::get('/categories', [\App\Domain\Inventory\Controllers\CategoryController::class, 'index']);
+    Route::post('/categories', [\App\Domain\Manufacturing\Controllers\CategoryController::class, 'store']);
+    Route::get('/categories', [\App\Domain\Manufacturing\Controllers\CategoryController::class, 'index']);
 
-    Route::post('/products', [\App\Domain\Inventory\Controllers\ProductController::class, 'store']);
-    Route::post('/products', [\App\Domain\Inventory\Controllers\ProductController::class, 'store']);
+    Route::post('/products', [\App\Domain\Manufacturing\Controllers\ProductController::class, 'store']);
 
     Route::get('/products/{product}/inventories', [\App\Domain\Inventory\Controllers\InventoryController::class, 'show']);
     Route::post('/products/{product}/inventories', [\App\Domain\Inventory\Controllers\InventoryController::class, 'store']);
@@ -24,9 +23,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/user/cart', \App\Domain\Cart\Controllers\CartController::class);
 
-    Route::post('/products/{product}/cart', [\App\Domain\Cart\Controllers\CartItemController::class, 'store']);
-    Route::delete('/products/{product}/cart', [\App\Domain\Cart\Controllers\CartItemController::class, 'destroy']);
-    Route::patch('/products/{product}/cart', [\App\Domain\Cart\Controllers\CartItemController::class, 'update']);
+    Route::post('/products/{product}/cart-item', [\App\Domain\Cart\Controllers\CartItemController::class, 'store']);
+    Route::delete('/products/{product}/cart-item', [\App\Domain\Cart\Controllers\CartItemController::class, 'destroy']);
+
+    Route::post('/products/{product}/cart-item/increase', [\App\Domain\Cart\Controllers\CartItemQuantityController::class, 'store']);
+    Route::delete('/products/{product}/cart-item/decreases', [\App\Domain\Cart\Controllers\CartItemQuantityController::class, 'destroy']);
 
 //    Route::apiResource('/cart-item/{product_uuid}', \App\Domain\Cart\Controllers\CartItemController::class)
 //        ->only(['store', 'delete', 'update']);

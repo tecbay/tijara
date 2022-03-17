@@ -2,12 +2,12 @@
 
 namespace App\Domain\Cart;
 
-use App\Domain\Cart\Actions\AddCartItem;
+use App\Domain\Cart\Events\CartCreated;
 use App\Domain\Cart\Events\CartItemAdded;
+use App\Domain\Cart\Events\CartItemDecreased;
 use App\Domain\Cart\Events\CartItemRemoved;
-use App\Domain\Cart\Events\CartItemUpdated;
-use App\Domain\Inventory\Events\CartCreated;
-use App\Domain\Inventory\Projection\Product;
+use App\Domain\Cart\Events\CartItemIncreased;
+use App\Domain\Manufacturing\Projection\Product;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\ValidationException;
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
@@ -40,7 +40,6 @@ class CartAggregateRoot extends AggregateRoot
             throw ValidationException::withMessages(['error' => 'Insufficient stock.']);
         }
 
-
         $this->recordThat(new CartItemAdded($productUuid, $qty));
 
         return $this;
@@ -53,12 +52,15 @@ class CartAggregateRoot extends AggregateRoot
             throw ValidationException::withMessages(['error' => 'Product not exists in cart.']);
         }
 
-        $this->recordThat(new CartItemRemoved($productUuid));
+        $this->recordThat(new CartItemRemoved(
+                productUuid: $productUuid,
+                qty: $this->items->get($productUuid)['qty'])
+        );
 
         return $this;
     }
 
-    public function updateItem(string $productUuid, int $qty)
+    public function increaseItemQty(string $productUuid, int $qty)
     {
         if ($this->items->notExists($productUuid)) {
             throw ValidationException::withMessages(['error' => 'Product not exists in cart.']);
@@ -68,7 +70,22 @@ class CartAggregateRoot extends AggregateRoot
             throw ValidationException::withMessages(['error' => 'Insufficient stock.']);
         }
 
-        $this->recordThat(new CartItemUpdated($productUuid, $qty));
+        $this->recordThat(new CartItemIncreased($productUuid, $qty));
+
+        return $this;
+    }
+
+    public function decreaseItemQty(string $productUuid, int $qty)
+    {
+        if ($this->items->notExists($productUuid)) {
+            throw ValidationException::withMessages(['error' => 'Product not exists in cart.']);
+        }
+
+        if (($this->items->get($productUuid)['qty'] - $qty) < 1) {
+            throw ValidationException::withMessages(['error' => 'Cart item can not be zero or negative']);
+        }
+
+        $this->recordThat(new CartItemDecreased($productUuid, $qty));
 
         return $this;
     }
@@ -88,11 +105,21 @@ class CartAggregateRoot extends AggregateRoot
         $this->items->forget($event->productUuid);
     }
 
-    protected function applyCartItemUpdated(CartItemUpdated $event)
+    protected function applyCartItemDecreased(CartItemDecreased $event)
     {
         $this->items->transform(function ($item, $key) use ($event) {
             if ($key === $event->productUuid) {
-                $item['qty'] = $event->qty;
+                $item['qty'] -= $event->qty;
+            }
+            return $item;
+        });
+    }
+
+    protected function applyCartItemIncreased(CartItemIncreased $event)
+    {
+        $this->items->transform(function ($item, $key) use ($event) {
+            if ($key === $event->productUuid) {
+                $item['qty'] += $event->qty;
             }
             return $item;
         });

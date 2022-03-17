@@ -3,6 +3,7 @@
 namespace App\Domain\Cart\Controllers;
 
 use App\Domain\Cart\Actions\AddCartItem;
+use App\Domain\Cart\Actions\IncreaseCartItem;
 use App\Domain\Cart\Actions\InitializeCart;
 use App\Domain\Cart\Actions\RemoveCartItem;
 use App\Domain\Cart\Actions\DecreaseCartItem;
@@ -10,10 +11,10 @@ use App\Domain\Manufacturing\Projection\Product;
 use Illuminate\Http\Request;
 use function auth;
 
-class CartItemController
+class CartItemQuantityController
 {
     /**
-     * This api responsible for adding an item into active cart.
+     * This api responsible for increase the quantity of a cart item
      *
      */
     public function store(Product $product, Request $request)
@@ -22,30 +23,27 @@ class CartItemController
 
         $cart = auth()->user()->activeCart;
 
-        if (! $cart) {
-            $cart = (new InitializeCart(auth()->user()->uuid))();
+        if ($cart) {
+            (new IncreaseCartItem($cart->uuid, $product->uuid, $request->qty))();
         }
 
-        (new AddCartItem($cart->uuid, $product->uuid, $request->qty))();
-
-        return response()->json([], 204);
+        return response()->json([], 202);
     }
 
     /**
-     * This is responsible for removing an item from active cart.
+     * This api responsible for decrease the quantity of a cart item
      *
-     * @param $productUuid
-     * @param  Request  $request
-     * @return void
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product, Request $request)
     {
         $cart = auth()->user()->activeCart;
 
+        $request->validate(['qty' => ['required', 'numeric', 'min:1']]);
+
         if ($cart) {
-            (new RemoveCartItem($cart->uuid, $product->uuid))();
+            (new DecreaseCartItem($cart->uuid, $product->uuid, $request->qty))();
         }
 
-        return response()->json([], 204);
+        return response()->json([], 202);
     }
 }

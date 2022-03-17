@@ -3,7 +3,8 @@
 namespace App\Domain\Cart\Projectors;
 
 use App\Domain\Cart\Enums\CartStatus;
-use App\Domain\Cart\Events\CartItemUpdated;
+use App\Domain\Cart\Events\CartItemDecreased;
+use App\Domain\Cart\Events\CartItemIncreased;
 use App\Domain\Cart\Projection\CartItem;
 use App\Domain\Cart\Events\CartItemAdded;
 use App\Domain\Cart\Events\CartItemRemoved;
@@ -20,16 +21,20 @@ class CartItemProjector extends Projector
                 'product_uuid' => $event->productUuid,
                 'qty'          => $event->qty,
             ]);
-
     }
 
-    public function onCartItemUpdated(CartItemUpdated $event)
+    public function onCartItemIncreased(CartItemIncreased $event)
     {
         CartItem::whereCartUuid($event->aggregateRootUuid())
             ->whereProductUuid($event->productUuid)
-            ->update([
-                'qty' => $event->qty,
-            ]);;
+            ->increment('qty', $event->qty);
+    }
+
+    public function onCartItemDecreased(CartItemDecreased $event)
+    {
+        CartItem::whereCartUuid($event->aggregateRootUuid())
+            ->whereProductUuid($event->productUuid)
+            ->decrement('qty', $event->qty);
     }
 
     public function onCartItemRemoved(CartItemRemoved $event)

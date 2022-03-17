@@ -2,7 +2,7 @@
 
 namespace Tests\Domain\Inventory;
 
-use App\Domain\Inventory\Supports\Enums\ProductStatus;
+use App\Domain\Manufacturing\Supports\Enums\ProductStatus;
 use App\Support\Enums\Boolean;
 use Illuminate\Support\Str;
 use Tecbay\Laramedia\Models\TemporaryMedia;
