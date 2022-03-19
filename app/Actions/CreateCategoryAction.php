@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Domain\Manufacturing\Actions;
+namespace App\Actions;
 
-use App\Domain\Inventory\Projection\Category;
-use App\Domain\Manufacturing\CategoryAggregateRoot;
 use App\Domain\Manufacturing\DataTransferObjects\CategoryDTO;
+use App\Models\Category;
 use App\Support\Uuid;
 
 class CreateCategoryAction
@@ -16,9 +15,14 @@ class CreateCategoryAction
     public function __invoke(): Category
     {
         $uuid = Uuid::new();
-        CategoryAggregateRoot::retrieve($uuid)
-            ->createCategory($this->categoryDTO)
-            ->persist();
+
+        Category::create([
+            'uuid'        => $uuid,
+            'title'       => $this->categoryDTO->title,
+            'description' => $this->categoryDTO->description,
+            'parent_uuid' => $this->categoryDTO->parent_uuid,
+        ]);
+
 
         return Category::find($uuid);
     }

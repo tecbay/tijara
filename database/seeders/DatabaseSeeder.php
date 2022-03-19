@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Domain\Manufacturing\Actions\CreateCategoryAction;
+use App\Actions\CreateCategoryAction;
 use App\Domain\Manufacturing\DataTransferObjects\CategoryDTO;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -17,13 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /** @var User $user */
         $user = \App\Models\User::factory()->create([
-            'email' => 'admin@gmail.com',
+            'email'    => env('ADMIN_EMAIL', 'admin@gmail.com'),
+            'password' => Hash::make(env('ADMIN_PASSWORD', 'password')),
         ]);
 
-        (new CreateCategoryAction(
-            new CategoryDTO(Str::random(8), null, null))
-        )();
+        $this->call(CategorySeeder::class);
     }
 }

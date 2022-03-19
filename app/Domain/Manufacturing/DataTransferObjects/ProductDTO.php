@@ -3,13 +3,17 @@ declare(strict_types=1);
 
 namespace App\Domain\Manufacturing\DataTransferObjects;
 
-use App\Domain\Inventory\Projection\Category;
 use App\Domain\Inventory\Supports\Sku;
+use App\Domain\Manufacturing\Projection\Product;
 use App\Domain\Manufacturing\Requests\ProductCreateRequest;
 use App\Domain\Manufacturing\Supports\Enums\ProductStatus;
+use App\Models\Category;
 use App\Support\Enums\Boolean;
 use App\Support\Uuid;
 
+/**
+ * @property Category category
+ */
 class ProductDTO
 {
 
@@ -17,7 +21,7 @@ class ProductDTO
         public string $uuid,
         public string $title,
         public ?string $description,
-        public Category $category,
+        public string $categoryUuid,
         public ?array $medias,
         public ?string $sku,
         public Boolean $track_quantity,
@@ -36,7 +40,7 @@ class ProductDTO
             uuid: Uuid::new(),
             title: $request->title,
             description: $request->description,
-            category: Category::find($request->category_uuid),
+            categoryUuid: $request->category_uuid,
             medias: $request->medias,
             sku: $request->sku ?? Sku::new($request->title),
             track_quantity: Boolean::from($request->track_quantity),
@@ -51,16 +55,37 @@ class ProductDTO
         return $dto;
     }
 
-    /**
-     * @param  int  $availableInventory
-     */
-    protected function setAvailableInventory(int $availableInventory): void
+    public static function fromProductProjection(Product $product)
     {
-        $this->availableInventory = $availableInventory;
+
+        $dto = new self(
+            uuid: $product->uuid,
+            title: $product->title,
+            description: $product->description,
+            categoryUuid: $product->category_uuid,
+            medias: $product->medias,
+            sku: $product->sku,
+            track_quantity: Boolean::from($product->track_quantity),
+            status: ProductStatus::from($product->status),
+            price: floatval($product->price),
+            compareAtPrice: floatval($product->compare_at_price),
+            costPerItem: floatval($product->cost_per_item),
+            physicalProduct: Boolean::from($product->physical_product),
+            weight: floatval($product->weight)
+        );
+
+        return $dto;
     }
 
     public function __toString(): string
     {
         return $this->uuid;
+    }
+
+    public function __get(string $name)
+    {
+        if ($name == 'category') {
+            return Category::find($this->categoryUuid);
+        }
     }
 }

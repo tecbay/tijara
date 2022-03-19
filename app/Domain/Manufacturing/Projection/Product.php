@@ -3,6 +3,7 @@
 namespace App\Domain\Manufacturing\Projection;
 
 use App\Domain\Inventory\Projection\Inventory;
+use App\Support\Enums\Boolean;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\EventSourcing\Projections\Projection;
@@ -10,7 +11,7 @@ use Tecbay\Laramedia\Contract\HasMedia;
 use Tecbay\Laramedia\Traits\InteractsWithMedia;
 
 /**
- * @property boolean $track_quantity
+ * @property string $track_quantity
  */
 class Product extends Projection implements HasMedia
 {

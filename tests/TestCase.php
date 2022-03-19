@@ -2,8 +2,8 @@
 
 namespace Tests;
 
+use App\Actions\CreateCategoryAction;
 use App\Domain\ACL\Actions\CreateUser;
-use App\Domain\Manufacturing\Actions\CreateCategoryAction;
 use App\Domain\Manufacturing\DataTransferObjects\CategoryDTO;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -17,7 +17,7 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication, WithFaker;
 
-    public \App\Domain\Inventory\Projection\Category $category;
+    public \App\Models\Category $category;
     public User $user;
 
     protected function setUp(): void

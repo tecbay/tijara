@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Manufacturing\Events;
+namespace App\StorableEvents;
 
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 
@@ -11,4 +11,9 @@ class CategoryCreated extends ShouldBeStored
         public ?string $description,
         public ?string $parent_uuid,
     ) {}
+
+    public function __invoke()
+    {
+
+    }
 }
