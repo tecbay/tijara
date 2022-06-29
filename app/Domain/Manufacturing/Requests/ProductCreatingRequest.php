@@ -12,7 +12,6 @@ use Tecbay\Laramedia\Traits\ValidateMedia;
 /**
  * @property string $title
  * @property  string|null $description
- * @property  string $category_uuid
  * @property  array $medias
  * @property  string|null $sku
  * @property  string $track_quantity
@@ -24,7 +23,7 @@ use Tecbay\Laramedia\Traits\ValidateMedia;
  * @property  string $physical_product
  * @property  float|null $weight
  */
-class ProductCreateRequest extends FormRequest
+class ProductCreatingRequest extends FormRequest
 {
     use ValidateMedia;
 
@@ -51,7 +50,6 @@ class ProductCreateRequest extends FormRequest
             'uuid'             => ['exclude'],
             'title'            => ['required', 'string', 'max:255'],
             'description'      => ['sometimes', 'string', 'max:255'],
-            'category_uuid'    => ['required', 'exists:categories,uuid', 'uuid'],
             'medias'           => ['sometimes', 'array', 'max:3', $this->images()],
             'sku'              => ['sometimes', 'string', 'max:255'],
             'track_quantity'   => ['required', new Enum(Boolean::class)],

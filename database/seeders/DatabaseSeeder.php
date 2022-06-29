@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Domain\Manufacturing\Actions\CreateCategoryAction;
-use App\Domain\Manufacturing\DataTransferObjects\CategoryDTO;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -22,8 +20,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
         ]);
 
-        (new CreateCategoryAction(
-            new CategoryDTO(Str::random(8), null, null))
-        )();
     }
 }

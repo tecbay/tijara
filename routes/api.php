@@ -12,10 +12,11 @@ Route::post('/v1/login', \App\Http\Controllers\LoginController::class);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::get('/categories', [\App\Domain\Manufacturing\Controllers\CategoryController::class, 'index']);
-    Route::post('/categories', [\App\Domain\Manufacturing\Controllers\CategoryController::class, 'store']);
-
     Route::post('/products', [\App\Domain\Manufacturing\Controllers\ProductController::class, 'store']);
+
+
+
+
 
     Route::get('/products/{product}/inventories', [\App\Domain\Inventory\Controllers\InventoryController::class, 'show']);
     Route::post('/products/{product}/inventories', [\App\Domain\Inventory\Controllers\InventoryController::class, 'store']);

@@ -3,8 +3,6 @@
 namespace Tests;
 
 use App\Domain\ACL\Actions\CreateUser;
-use App\Domain\Manufacturing\Actions\CreateCategoryAction;
-use App\Domain\Manufacturing\DataTransferObjects\CategoryDTO;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -17,7 +15,6 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication, WithFaker;
 
-    public \App\Domain\Inventory\Projection\Category $category;
     public User $user;
 
     protected function setUp(): void
@@ -28,7 +25,6 @@ abstract class TestCase extends BaseTestCase
             Storage::deleteDirectory('');
         });
 
-        $this->category = (new CreateCategoryAction(new CategoryDTO('Top Category', null, null)))();
 
         $this->user = (new CreateUser(
             name: Str::random(4),

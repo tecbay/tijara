@@ -16,7 +16,6 @@ class ProductProjector extends Projector
                 'uuid'             => $event->aggregateRootUuid(),
                 'title'            => $event->title,
                 'description'      => $event->description,
-                'category_uuid'    => $event->categoryUuid,
                 'sku'              => $event->sku,
                 'track_quantity'   => $event->trackQuantity->value,
                 'status'           => $event->status->value,

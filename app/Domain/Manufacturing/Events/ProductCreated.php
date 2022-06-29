@@ -12,7 +12,6 @@ class ProductCreated extends ShouldBeStored
     public function __construct(
         public string $title,
         public ?string $description,
-        public string $categoryUuid,
         public ?array $medias,
         public ?string $sku,
         public Boolean|array $trackQuantity,

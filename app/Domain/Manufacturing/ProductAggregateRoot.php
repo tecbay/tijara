@@ -19,7 +19,6 @@ class ProductAggregateRoot extends AggregateRoot
         $this->recordThat(new ProductCreated(
             title: $productDTO->title,
             description: $productDTO->description,
-            categoryUuid: $productDTO->category->uuid,
             medias: $productDTO->medias,
             sku: $productDTO->sku,
             trackQuantity: $productDTO->track_quantity,
