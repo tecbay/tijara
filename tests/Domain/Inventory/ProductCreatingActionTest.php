@@ -18,7 +18,6 @@ class ProductCreatingActionTest extends TestCase
             'uuid'             => Str::random(8),
             'title'            => Str::random(8),
             'description'      => Str::random(8),
-            'category_uuid'    => $this->category->uuid,
             'medias'           => [
                 TemporaryMedia::new()->uuid,
             ],
@@ -33,7 +32,8 @@ class ProductCreatingActionTest extends TestCase
             'weight'           => 10.0,
         ];
 
-        $this->postJson('api/products', $attr)->assertOk();
+        $this->actingAs($this->user)
+            ->postJson('api/products', $attr)->assertOk();
 
 
     }

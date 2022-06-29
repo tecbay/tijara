@@ -21,7 +21,6 @@ class CartItemActionTest extends TestCase
             uuid: Uuid::new(),
             title: Str::random(8),
             description: '',
-            category: $this->category,
             medias: null, sku: Str::random(4),
             track_quantity: Boolean::YES,
             status: ProductStatus::Active,

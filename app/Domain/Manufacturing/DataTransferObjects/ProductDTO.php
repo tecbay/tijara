@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace App\Domain\Manufacturing\DataTransferObjects;
 
 use App\Domain\Inventory\Supports\Sku;
+
 use App\Domain\Manufacturing\Projection\Product;
-use App\Domain\Manufacturing\Requests\ProductCreateRequest;
+use App\Domain\Manufacturing\Requests\ProductCreatingRequest;
 use App\Domain\Manufacturing\Supports\Enums\ProductStatus;
 use App\Models\Category;
 use App\Support\Enums\Boolean;
@@ -21,7 +22,6 @@ class ProductDTO
         public string $uuid,
         public string $title,
         public ?string $description,
-        public string $categoryUuid,
         public ?array $medias,
         public ?string $sku,
         public Boolean $track_quantity,
@@ -34,13 +34,12 @@ class ProductDTO
     ) {
     }
 
-    public static function fromProductCreateRequest(ProductCreateRequest $request)
+    public static function fromProductCreatingRequest(ProductCreatingRequest $request)
     {
         $dto = new self(
             uuid: Uuid::new(),
             title: $request->title,
             description: $request->description,
-            categoryUuid: $request->category_uuid,
             medias: $request->medias,
             sku: $request->sku ?? Sku::new($request->title),
             track_quantity: Boolean::from($request->track_quantity),
@@ -62,7 +61,6 @@ class ProductDTO
             uuid: $product->uuid,
             title: $product->title,
             description: $product->description,
-            categoryUuid: $product->category_uuid,
             medias: $product->medias,
             sku: $product->sku,
             track_quantity: Boolean::from($product->track_quantity),

@@ -5,19 +5,17 @@ namespace App\Domain\Manufacturing\Actions;
 use App\Domain\Manufacturing\DataTransferObjects\ProductDTO;
 use App\Domain\Manufacturing\ProductAggregateRoot;
 use App\Domain\Manufacturing\Projection\Product;
+use App\Support\BaseAction;
 
-class CreateProductAction
+class CreateProductAction extends BaseAction
 {
-    public function __construct(
-        public ProductDTO $productDTO
-    ) {}
 
-    public function __invoke()
+
+    public static function execute(ProductDTO $productDTO): string
     {
-        ProductAggregateRoot::retrieve($this->productDTO)
-            ->create($this->productDTO)
+        ProductAggregateRoot::retrieve($productDTO->uuid)
+            ->create($productDTO)
             ->persist();
-
-        return Product::find($this->productDTO->uuid);
+        return $productDTO->uuid;
     }
 }

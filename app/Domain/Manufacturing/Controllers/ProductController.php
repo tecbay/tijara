@@ -6,7 +6,7 @@ use App\Domain\Inventory\Actions\AddInventory;
 use App\Domain\Manufacturing\Actions\AddProductPhoto;
 use App\Domain\Manufacturing\Actions\CreateProductAction;
 use App\Domain\Manufacturing\DataTransferObjects\ProductDTO;
-use App\Domain\Manufacturing\Requests\ProductCreateRequest;
+use App\Domain\Manufacturing\Requests\ProductCreatingRequest;
 use App\Http\Controller;
 use App\Support\Enums\Boolean;
 use function response;
@@ -24,11 +24,11 @@ class ProductController extends Controller
      *
      *
      */
-    public function store(ProductCreateRequest $request)
+    public function store(ProductCreatingRequest $request)
     {
-        $productDto = ProductDTO::fromProductCreateRequest($request);
+        $productDto = ProductDTO::fromProductCreatingRequest($request);
 
-        $product = (new CreateProductAction($productDto))();
+        $product = CreateProductAction::execute($productDto);
 
         if (Boolean::tryFrom($request->track_quantity) === Boolean::YES) {
             (new AddInventory($productDto->uuid, $request->inventory_qty))();

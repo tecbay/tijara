@@ -17,7 +17,6 @@ class AddInventory
 
     public function __invoke()
     {
-
         InventoryAggregateRoot::retrieve($this->product->uuid)
             ->addInventory($this->qty)
             ->persist();

@@ -20,7 +20,6 @@ return new class extends Migration {
             $table->uuid()->primary()->index();
             $table->string('title', 128);
             $table->text('description')->nullable()->invisible();
-            $table->text('category_uuid');
             $table->text('sku');
             $table->enum('track_quantity', Arr::pluck(Boolean::cases(), 'value'))->index();
             $table->enum('status', Arr::pluck(ProductStatus::cases(), 'value'))->index();
