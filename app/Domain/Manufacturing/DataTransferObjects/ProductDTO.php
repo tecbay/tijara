@@ -4,11 +4,17 @@ declare(strict_types=1);
 namespace App\Domain\Manufacturing\DataTransferObjects;
 
 use App\Domain\Inventory\Supports\Sku;
+
+use App\Domain\Manufacturing\Projection\Product;
 use App\Domain\Manufacturing\Requests\ProductCreatingRequest;
 use App\Domain\Manufacturing\Supports\Enums\ProductStatus;
+use App\Models\Category;
 use App\Support\Enums\Boolean;
 use App\Support\Uuid;
 
+/**
+ * @property Category category
+ */
 class ProductDTO
 {
 
@@ -48,16 +54,36 @@ class ProductDTO
         return $dto;
     }
 
-    /**
-     * @param  int  $availableInventory
-     */
-    protected function setAvailableInventory(int $availableInventory): void
+    public static function fromProductProjection(Product $product)
     {
-        $this->availableInventory = $availableInventory;
+
+        $dto = new self(
+            uuid: $product->uuid,
+            title: $product->title,
+            description: $product->description,
+            medias: $product->medias,
+            sku: $product->sku,
+            track_quantity: Boolean::from($product->track_quantity),
+            status: ProductStatus::from($product->status),
+            price: floatval($product->price),
+            compareAtPrice: floatval($product->compare_at_price),
+            costPerItem: floatval($product->cost_per_item),
+            physicalProduct: Boolean::from($product->physical_product),
+            weight: floatval($product->weight)
+        );
+
+        return $dto;
     }
 
     public function __toString(): string
     {
         return $this->uuid;
+    }
+
+    public function __get(string $name)
+    {
+        if ($name == 'category') {
+            return Category::find($this->categoryUuid);
+        }
     }
 }

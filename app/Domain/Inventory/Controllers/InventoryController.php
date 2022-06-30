@@ -4,6 +4,7 @@ namespace App\Domain\Inventory\Controllers;
 
 use App\Domain\Inventory\Actions\AddInventory;
 use App\Domain\Inventory\Actions\RemoveInventory;
+use App\Domain\Manufacturing\DataTransferObjects\ProductDTO;
 use App\Domain\Manufacturing\Projection\Product;
 use App\Http\Controller;
 use Illuminate\Http\Request;

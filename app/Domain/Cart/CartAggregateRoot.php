@@ -7,6 +7,7 @@ use App\Domain\Cart\Events\CartItemAdded;
 use App\Domain\Cart\Events\CartItemDecreased;
 use App\Domain\Cart\Events\CartItemRemoved;
 use App\Domain\Cart\Events\CartItemIncreased;
+use App\Domain\Inventory\Exceptions\InsufficientStockException;
 use App\Domain\Manufacturing\Projection\Product;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\ValidationException;
@@ -37,7 +38,7 @@ class CartAggregateRoot extends AggregateRoot
         }
 
         if (Product::find($productUuid)->inventory->qty < $qty) {
-            throw ValidationException::withMessages(['error' => 'Insufficient stock.']);
+            throw InsufficientStockException::withMessages(['error' => 'Insufficient stock.']);
         }
 
         $this->recordThat(new CartItemAdded($productUuid, $qty));

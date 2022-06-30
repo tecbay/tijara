@@ -6,6 +6,7 @@ use App\Domain\Cart\Actions\AddCartItem;
 use App\Domain\Cart\Actions\InitializeCart;
 use App\Domain\Cart\Actions\RemoveCartItem;
 use App\Domain\Cart\Actions\DecreaseCartItem;
+use App\Domain\Manufacturing\DataTransferObjects\ProductDTO;
 use App\Domain\Manufacturing\Projection\Product;
 use Illuminate\Http\Request;
 use function auth;
@@ -21,8 +22,9 @@ class CartItemController
      * @header Content-Type application/json
      *
      */
-    public function store(Product $product, Request $request)
+    public function store(ProductDTO $productDTO, Request $request)
     {
+
         $request->validate(['qty' => ['required', 'numeric', 'min:1']]);
 
         $cart = auth()->user()->activeCart;

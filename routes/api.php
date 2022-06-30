@@ -14,10 +14,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('/products', [\App\Domain\Manufacturing\Controllers\ProductController::class, 'store']);
 
-
-
-
-
     Route::get('/products/{product}/inventories', [\App\Domain\Inventory\Controllers\InventoryController::class, 'show']);
     Route::post('/products/{product}/inventories', [\App\Domain\Inventory\Controllers\InventoryController::class, 'store']);
     Route::delete('/products/{product}/inventories', [\App\Domain\Inventory\Controllers\InventoryController::class, 'destroy']);
